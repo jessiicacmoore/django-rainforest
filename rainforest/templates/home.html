@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="home-main">
+        <ul class="products-list">
+            {% for product in products %}
+            <li class="product">
+                <h3 class="name-price">{{ product.name }} - &cent;{{ product.price_in_cents }}</h3>
+                <p class="desc">{{ product.description }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

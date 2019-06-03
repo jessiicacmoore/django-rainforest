@@ -9,7 +9,7 @@ from .models import Product
 def home_page(request):
     
     context = {'products': Product.objects.all()}
-    response = render(request, 'base.html', context)
+    response = render(request, 'home.html', context)
     return HttpResponse(response)
 
 def root_path(request):
