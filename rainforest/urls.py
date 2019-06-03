@@ -22,4 +22,5 @@ urlpatterns = [
     path('', root_path),
     path('home/', home_page, name="home"),
     path('home/<int:id>', product_display, name='product_details'),
+    path('home/new', new_product_page, name='new_product'),
 ]
