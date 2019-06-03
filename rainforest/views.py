@@ -12,5 +12,12 @@ def home_page(request):
     response = render(request, 'home.html', context)
     return HttpResponse(response)
 
+
+def product_display(request, id):
+    product = Product.objects.get(id=id)
+    context = {'product': product}
+    return render(request, 'product_detail.html', context)
+
+
 def root_path(request):
     return HttpResponseRedirect('/home')

@@ -5,7 +5,7 @@
         <ul class="products-list">
             {% for product in products %}
             <li class="product">
-                <h3 class="name-price">{{ product.name }} - &cent;{{ product.price_in_cents }}</h3>
+                <a href="{% url 'product_details' id=product.id %}"><h3 class="name-price">{{ product.name }} - &cent;{{ product.price_in_cents }}</h3></a>
                 <p class="desc">{{ product.description }}</p>
             </li>
             {% endfor %}
