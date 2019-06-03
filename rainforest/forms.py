@@ -9,6 +9,8 @@ class ProductForm(ModelForm):
 
 
     # def clean(self): 
+        
+
     #     cleaned_data = super().clean()     
     #     body = cleaned_data.get('body')
 
