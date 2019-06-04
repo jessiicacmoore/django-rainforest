@@ -23,5 +23,6 @@ urlpatterns = [
     path('home/', home_page, name="home"),
     path('home/<int:id>', product_display, name='product_details'),
     path('home/new', new_product_page, name='new_product'),
-    path('home/<int:id>/edit/', edit_product, name='edit_product')
+    path('home/<int:id>/edit/', edit_product, name='edit_product'),
+    path('home/<int:id>/delete', delete_product, name='delete_product'),
 ]
