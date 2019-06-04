@@ -7,8 +7,12 @@
             <li class="product">
                 <a href="{% url 'product_details' id=product.id %}"><h3 class="name-price">{{ product.name }} - {{ product.price_in_dollars }}</h3></a>
                 <p class="desc">{{ product.description }}</p>
+                <p class="review-count">Reviews: {{ product.reviews.count }}</p>
             </li>
             {% endfor %}
         </ul>
+
+        
+
     </section>
 {% endblock %}

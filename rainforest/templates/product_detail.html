@@ -10,4 +10,10 @@
     <a href="{% url 'delete_product' id=product.id %}" class="btn">Delete Product</a>
 </section>
 
+    <ul>
+    {% for review in product.reviews.all %}
+    <li>{{ review.message }}</li>
+    {% endfor %}
+    </ul> 
+
 {% endblock %}
