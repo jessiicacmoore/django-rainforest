@@ -9,3 +9,11 @@ class Product(models.Model):
     def __str__(self):
         return "{} - ${}".format(self.name, self.price_in_cents)
 
+    def price_in_dollars(self):
+        dollars = self.price_in_cents / 100
+        return "${:.2f}".format(dollars)
+
+
+class Review(models.Model):
+    message = models.TextField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')

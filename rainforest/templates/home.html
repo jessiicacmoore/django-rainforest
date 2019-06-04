@@ -3,10 +3,9 @@
 {% block content %}
     <section class="home-main">
         <ul class="products-list">
-            <li><a href="{% url 'new_product' %}" class="new-product-link">+ New Product</a></li>
             {% for product in products %}
             <li class="product">
-                <a href="{% url 'product_details' id=product.id %}"><h3 class="name-price">{{ product.name }} - &cent;{{ product.price_in_cents }}</h3></a>
+                <a href="{% url 'product_details' id=product.id %}"><h3 class="name-price">{{ product.name }} - {{ product.price_in_dollars }}</h3></a>
                 <p class="desc">{{ product.description }}</p>
             </li>
             {% endfor %}
