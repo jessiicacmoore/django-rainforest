@@ -10,6 +10,12 @@
     <a href="{% url 'delete_product' id=product.id %}" class="btn">Delete Product</a>
 </section>
 
+<form method="POST" action="{% url 'review_product' id=product.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit review</button>
+</form>
+
     <ul>
     {% for review in product.reviews.all %}
     <li>{{ review.message }}</li>

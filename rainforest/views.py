@@ -4,7 +4,7 @@ from datetime import date
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from .models import Product
-from .forms import ProductForm
+from .forms import ProductForm, ReviewForm
 
 
 def home_page(request):
@@ -16,7 +16,8 @@ def home_page(request):
 
 def product_display(request, id):
     product = Product.objects.get(id=id)
-    context = {'product': product}
+    form = ReviewForm()
+    context = {'product': product, 'form': form}
     return render(request, 'product_detail.html', context)
 
 
@@ -59,3 +60,29 @@ def delete_product(request, id):
         return redirect("home")
     context={"object": obj}
     return render(request, template_name, context)
+
+
+def review_product(request, id):
+    product = get_object_or_404(Product, pk=id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.product = product
+            review.save()
+        return redirect("product_details", id=id)
+
+# def make_delivery(request, id):
+#     selected_paperboy = Paperboy.objects.get(id=id)
+#     if request.method == "POST":
+#         form = DeliveryForm(request.POST)
+#         if form.is_valid():
+#             start_address = form.cleaned_data.get("starting_house_number")
+#             end_address = form.cleaned_data.get("ending_house_number")
+#             selected_paperboy.deliver(
+#                 start_address=start_address, end_address=end_address
+#             )
+#             selected_paperboy.save()
+#             return redirect("home")
+#         else:
+#             root()

@@ -25,4 +25,5 @@ urlpatterns = [
     path('home/new', new_product_page, name='new_product'),
     path('home/<int:id>/edit/', edit_product, name='edit_product'),
     path('home/<int:id>/delete', delete_product, name='delete_product'),
+    path('home/<int:id>/reviews/create', review_product, name='review_product'),
 ]
