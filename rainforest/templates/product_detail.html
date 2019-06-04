@@ -18,7 +18,12 @@
 
     <ul>
     {% for review in product.reviews.all %}
-    <li>{{ review.message }}</li>
+    <li>
+        <p>{{ review.message }}</p>
+        <a href="{% url 'edit_review' product_id=product.id review_id=review.id %}">Edit review</a>
+        <a href="{% url 'delete_review' product_id=product.id review_id=review.id %}">Delete review</a>
+    </li>
+    
     {% endfor %}
     </ul> 
 

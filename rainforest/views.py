@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from datetime import date
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
-from .models import Product
+from .models import Product, Review
 from .forms import ProductForm, ReviewForm
 
 
@@ -61,7 +61,6 @@ def delete_product(request, id):
     context={"object": obj}
     return render(request, template_name, context)
 
-
 def review_product(request, id):
     product = get_object_or_404(Product, pk=id)
     if request.method == "POST":
@@ -70,19 +69,30 @@ def review_product(request, id):
             review = form.save(commit=False)
             review.product = product
             review.save()
-        return redirect("product_details", id=id)
+            return redirect("product_details", id=id)
 
-# def make_delivery(request, id):
-#     selected_paperboy = Paperboy.objects.get(id=id)
-#     if request.method == "POST":
-#         form = DeliveryForm(request.POST)
-#         if form.is_valid():
-#             start_address = form.cleaned_data.get("starting_house_number")
-#             end_address = form.cleaned_data.get("ending_house_number")
-#             selected_paperboy.deliver(
-#                 start_address=start_address, end_address=end_address
-#             )
-#             selected_paperboy.save()
-#             return redirect("home")
-#         else:
-#             root()
+
+def edit_review(request, product_id, review_id):
+    # obj = Review.objects.get(pk=review_id)
+    obj =  get_object_or_404(Review, pk=review_id)
+    product = Product.objects.get(pk=obj.product.id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=obj)
+        if form.is_valid():
+            new_review = form.save()
+            new_review.save()
+            return redirect("product_details", id=product.id)   
+    else:
+        form = ReviewForm(instance=obj)
+        context = { 'form': form, 'product': product}
+        response = render(request, 'edit_review.html', context)
+    return HttpResponse(response)
+
+def delete_review(request, product_id, review_id):
+    obj = get_object_or_404(Review, id=review_id)
+    template_name = 'delete_review.html'
+    if request.method == "POST":
+        obj.delete()
+        return redirect("home")
+    context={"object": obj}
+    return render(request, template_name, context)
