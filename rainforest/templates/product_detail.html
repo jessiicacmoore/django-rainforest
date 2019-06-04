@@ -6,7 +6,7 @@
     <h3 class="title">{{ product.name }}</h3>
     <h4 class="price">&cent;{{ product.price_in_cents }}</h4>
     <p class="desc">{{ product.description }}</p>
-    <a href="" class="btn">Edit Product</a>
+    <a href="{% url 'edit_product' id=product.id %}" class="btn">Edit Product</a>
     <a href="" class="btn">Delete Product</a>
 </section>
 
